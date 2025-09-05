@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, Lock } from "lucide-react";
+import { signInWithGoogle } from "../firebase"; // 🔥 import our google auth function
 
 const Login = ({ onLogin }) => {
   const [loading, setLoading] = useState(false);
@@ -11,21 +12,29 @@ const Login = ({ onLogin }) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      onLogin({ email: "demo@user.com" }); 
+      onLogin({ email: "demo@user.com" });
       navigate("/dashboard");
     }, 1500);
   };
 
+  // ✅ Google login handler
+  const handleGoogleLogin = async () => {
+    try {
+      const user = await signInWithGoogle();
+      onLogin(user); // send user to parent
+      navigate("/dashboard");
+    } catch (error) {
+      alert("Google Sign-in failed. Try again!");
+    }
+  };
+
   return (
     <div className="w-screen h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#f4e1c1] via-[#fbe9d7] to-[#f9f3ea]">
-      {/* Glassy Box */}
-      <div
-        className="relative z-10 w-full max-w-sm px-6 py-8 
+      <div className="relative z-10 w-full max-w-sm px-6 py-8 
                    bg-white/25 backdrop-blur-md shadow-xl 
                    rounded-lg border border-amber-300/40 
                    hover:scale-105 transition-transform 
-                   duration-300 ease-in-out"
-      >
+                   duration-300 ease-in-out">
         <h2 className="title-font text-3xl font-bold text-center text-amber-900 mb-3">
           Welcome Back
         </h2>
@@ -63,7 +72,7 @@ const Login = ({ onLogin }) => {
             />
           </div>
 
-          {/* Button */}
+          {/* Normal Login Button */}
           <button
             type="submit"
             disabled={loading}
@@ -75,6 +84,26 @@ const Login = ({ onLogin }) => {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        {/* Divider */}
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-amber-300" />
+          <span className="px-2 text-xs text-amber-700">OR</span>
+          <hr className="flex-grow border-amber-300" />
+        </div>
+
+        {/* ✅ Google Login Button */}
+        <button
+          onClick={handleGoogleLogin}
+          className="w-full py-2 flex items-center justify-center gap-2 rounded-md border border-amber-300 bg-white/80 hover:bg-amber-50 transition font-medium text-black"
+        >
+          <img
+            src="https://www.svgrepo.com/show/355037/google.svg"
+            alt="Google"
+            className="w-5 h-5"
+          />
+          Continue with Google
+        </button>
 
         {/* Footer */}
         <div className="mt-4 text-center">

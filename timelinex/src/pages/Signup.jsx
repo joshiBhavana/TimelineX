@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { User, Lock, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { signInWithGoogle } from "../firebase"; // ✅ import Google Auth
 
 const Signup = ({ onSignup }) => {
   const navigate = useNavigate();
@@ -10,16 +11,26 @@ const Signup = ({ onSignup }) => {
     e.preventDefault();
     setLoading(true);
 
-    // Fake signup delay
     setTimeout(() => {
       const userData = { email: "demo@example.com" };
       onSignup(userData);
 
       setLoading(false);
 
-      // ✅ navigate to interests right after signup
+      // ✅ navigate to interests after signup
       navigate("/interests", { replace: true });
     }, 1500);
+  };
+
+  // ✅ Google Signup Handler
+  const handleGoogleSignup = async () => {
+    try {
+      const user = await signInWithGoogle();
+      onSignup(user); // pass user to parent
+      navigate("/interests", { replace: true });
+    } catch (error) {
+      alert("Google Sign-up failed. Try again!");
+    }
   };
 
   return (
@@ -52,6 +63,7 @@ const Signup = ({ onSignup }) => {
           Join <span className="font-semibold">TimelineX</span> and start exploring
         </p>
 
+        {/* Normal Signup Form */}
         <form onSubmit={handleSignup} className="space-y-6">
           {/* Name */}
           <div className="relative">
@@ -86,7 +98,7 @@ const Signup = ({ onSignup }) => {
             />
           </div>
 
-          {/* Button */}
+          {/* Signup Button */}
           <button
             type="submit"
             disabled={loading}
@@ -95,6 +107,26 @@ const Signup = ({ onSignup }) => {
             {loading ? "Signing up..." : "Sign Up"}
           </button>
         </form>
+
+        {/* Divider */}
+        <div className="flex items-center my-6">
+          <hr className="flex-grow border-amber-300" />
+          <span className="px-2 text-xs text-amber-700">OR</span>
+          <hr className="flex-grow border-amber-300" />
+        </div>
+
+        {/* ✅ Google Signup Button */}
+        <button
+          onClick={handleGoogleSignup}
+          className="w-full py-3 flex items-center justify-center gap-2 rounded-xl border border-amber-300 bg-white/80 hover:bg-amber-50 transition font-medium text-black"
+        >
+          <img
+            src="https://www.svgrepo.com/show/355037/google.svg"
+            alt="Google"
+            className="w-5 h-5"
+          />
+          Continue with Google
+        </button>
 
         {/* Footer Links */}
         <div className="mt-6 text-center">
