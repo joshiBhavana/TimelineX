@@ -1,0 +1,41 @@
+/* App.css - Cleaned for Tailwind + Fullscreen UI */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Optional: global font and background */
+/* index.css or App.css */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lato:wght@300;400;600&display=swap');
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #f9fafb;
+}
+h1, h2, h3, .title-font {
+  font-family: 'Cinzel', serif;
+
+  background-color: #f9fafb; /* Tailwind gray-50 */
+}
+
+/* Remove old CRA styles */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
