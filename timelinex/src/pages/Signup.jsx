@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { User, Lock, Mail } from "lucide-react";
+import { User, Lock, Mail, Eye, EyeOff } from "lucide-react"; // added Eye icons
 import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../firebase"; // ✅ import Google Auth
 
 const Signup = ({ onSignup }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // password visibility
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -34,88 +35,109 @@ const Signup = ({ onSignup }) => {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-100 to-yellow-100">
-      {/* Floating Background Orbs */}
-      <div className="absolute inset-0">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full opacity-20 animate-pulse"
-            style={{
-              background: `radial-gradient(circle, #f59e0b, #eab308)`,
-              width: `${80 + i * 40}px`,
-              height: `${80 + i * 40}px`,
-              left: `${(i * 12) % 90}%`,
-              top: `${(i * 15) % 90}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${5 + i * 2}s`,
-            }}
-          />
-        ))}
-      </div>
+    <div className="w-screen h-screen flex items-center justify-center relative overflow-hidden bg-[#fbe5e0]">
+      <div
+        className="relative z-10 w-full max-w-md px-8 py-10
+             bg-[#c89870] 
+             shadow-2xl 
+             rounded-xl border border-[#9c5a40] 
+             hover:scale-105 hover:shadow-3xl 
+             transition-all duration-500 ease-in-out animate-fadeIn
+             text-white"
+      >
 
-      {/* Signup Card */}
-      <div className="relative z-10 w-full max-w-md px-8 py-10 bg-white/70 backdrop-blur-lg shadow-2xl rounded-2xl border border-amber-200 animate-fadeIn">
-        <h2 className="text-4xl font-bold text-center text-amber-900 mb-6">
+        <h2 className="title-font text-4xl font-bold text-center text-white mb-3 animate-slideDown">
           Create Account
         </h2>
-        <p className="text-center text-amber-700 mb-8">
-          Join <span className="font-semibold">TimelineX</span> and start exploring
+        <p className="text-center text-sm text-white mb-3 mb-6 font-[Lato] animate-slideUp">
+          Join <span className="font-semibold title-font text-red-600 mb-3">TimelineX</span> and start exploring
         </p>
 
         {/* Normal Signup Form */}
-        <form onSubmit={handleSignup} className="space-y-6">
-          {/* Name */}
-          <div className="relative">
-            <User className="absolute left-3 top-3 w-5 h-5 text-amber-600" />
+        <form onSubmit={handleSignup} className="space-y-4 text-sm font-[Lato]">
+          {/* First Name */}
+          <div className="relative animate-slideLeft">
+            <User className="absolute left-3 top-3 w-4 h-4"
+              style={{ color: "#9c5a40" }} />
             <input
               type="text"
-              placeholder="Full Name"
+              placeholder="First Name"
               required
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-400 focus:outline-none"
+              className="w-full pl-9 pr-3 py-2 rounded-md border border-[#5C3A21] 
+                        focus:ring-1 focus:ring-[#c89870] focus:outline-none 
+                        bg-white/60 text-black caret-black"
+            />
+          </div>
+
+          {/* Last Name */}
+          <div className="relative animate-slideLeft">
+            <User className="absolute left-3 top-3 w-4 h-4"
+              style={{ color: "#9c5a40" }} />
+            <input
+              type="text"
+              placeholder="Last Name"
+              required
+              className="w-full pl-9 pr-3 py-2 rounded-md border border-[#5C3A21] 
+                        focus:ring-1 focus:ring-[#c89870] focus:outline-none 
+                        bg-white/60 text-black caret-black"
             />
           </div>
 
           {/* Email */}
-          <div className="relative">
-            <Mail className="absolute left-3 top-3 w-5 h-5 text-amber-600" />
+          <div className="relative animate-slideLeft">
+            <Mail className="absolute left-3 top-3 w-4 h-4"
+              style={{ color: "#9c5a40" }} />
             <input
               type="email"
               placeholder="Email"
               required
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-400 focus:outline-none"
+              className="w-full pl-9 pr-3 py-2 rounded-md border border-[#5C3A21] 
+                        focus:ring-1 focus:ring-[#c89870] focus:outline-none 
+                        bg-white/60 text-black caret-black"
             />
           </div>
 
-          {/* Password */}
-          <div className="relative">
-            <Lock className="absolute left-3 top-3 w-5 h-5 text-amber-600" />
+          {/* Password with Eye Icon */}
+          <div className="relative animate-slideRight">
+            <Lock className="absolute left-3 top-3 w-4 h-4"
+              style={{ color: "#9c5a40" }} />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               required
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-400 focus:outline-none"
+              className="w-full pr-10 pl-9 py-2 rounded-md border border-[#5C3A21] 
+                        focus:ring-1 focus:ring-[#c89870] focus:outline-none 
+                        bg-white/60 text-black caret-black"
             />
+            <div
+              className="absolute right-3 top-3 cursor-pointer text-[#9c5a40]"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </div>
           </div>
 
           {/* Signup Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-amber-500 to-orange-500 shadow-lg hover:scale-105 transform transition duration-300 disabled:opacity-70"
+            className="w-full py-2 rounded-md font-semibold text-white text-lg
+           bg-[#9c5a40] shadow-md 
+           hover:shadow-lg hover:opacity-95 transition duration-300 
+           disabled:opacity-60 animate-pulse"
           >
             {loading ? "Signing up..." : "Sign Up"}
           </button>
         </form>
 
-        {/* Divider */}
-        <div className="flex items-center my-6">
-          <hr className="flex-grow border-amber-300" />
-          <span className="px-2 text-xs text-amber-700">OR</span>
-          <hr className="flex-grow border-amber-300" />
+        {/* OR divider */}
+        <div className="flex items-center my-4 animate-fadeIn">
+          <hr className="flex-grow border-[#654321]" />
+          <span className="px-2 text-xs text-white">OR</span>
+          <hr className="flex-grow border-[#654321]" />
         </div>
 
-        {/* ✅ Google Signup Button */}
+        {/* Google Signup Button */}
         <button
           onClick={handleGoogleSignup}
           className="w-full py-3 flex items-center justify-center gap-2 rounded-xl border border-amber-300 bg-white/80 hover:bg-amber-50 transition font-medium text-black"
@@ -129,12 +151,12 @@ const Signup = ({ onSignup }) => {
         </button>
 
         {/* Footer Links */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-amber-700">
-            Already have an account?{" "}
+        <div className="mt-4 text-center animate-fadeIn">
+          <p className="text-xs text-white font-[Lato]">
+            Already have an account?
             <button
               onClick={() => navigate("/login")}
-              className="text-orange-600 font-semibold hover:underline"
+              className="text-white font-semibold hover:underline bg-transparent"
             >
               Login
             </button>

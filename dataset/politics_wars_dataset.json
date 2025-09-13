@@ -1,0 +1,252 @@
+{
+  "theme_id": "1",
+  "theme_name": "Politics & Wars",
+  "sub_themes": [
+    {
+      "sub_theme_id": "1.1",
+      "sub_theme_name": "Ancient Kingdoms & Empires",
+      "events": [
+        {
+          "event_id": "1",
+          "event_name": "Rise of the Maurya Empire",
+          "description_prompt": "Explain the rise of the Maurya Empire under Chandragupta in 322 BCE.",
+          "images_prompt": "Ancient Maurya Empire map and soldiers in battle formation.",
+          "video_prompt": "Documentary footage explaining the Maurya Empire’s expansion and governance."
+        },
+        {
+          "event_id": "2",
+          "event_name": "Ashoka spreads Buddhism",
+          "description_prompt": "Describe how Emperor Ashoka spread Buddhism across India and beyond during his reign.",
+          "images_prompt": "Ashoka’s pillars, inscriptions, and Buddhist monks spreading teachings.",
+          "video_prompt": "Educational videos explaining Ashoka’s policies and the spread of Buddhism."
+        },
+        {
+          "event_id": "3",
+          "event_name": "Gupta Empire’s golden age",
+          "description_prompt": "Explain the achievements of the Gupta Empire in science, arts, and governance.",
+          "images_prompt": "Temples, sculptures, and scholarly manuscripts from the Gupta period.",
+          "video_prompt": "Documentaries exploring cultural and scientific advancements during the Gupta rule."
+        },
+        {
+          "event_id": "4",
+          "event_name": "Harsha’s rule",
+          "description_prompt": "Describe the governance, expansion, and administrative reforms of Emperor Harsha.",
+          "images_prompt": "Ancient royal courts and military campaigns under Harsha’s leadership.",
+          "video_prompt": "Historical analysis videos of Harsha’s contributions to North India."
+        },
+        {
+          "event_id": "5",
+          "event_name": "Establishment of the Chola Empire",
+          "description_prompt": "Explain the rise and influence of the Chola dynasty in South India.",
+          "images_prompt": "Chola temples, sculptures, and naval expeditions in South India.",
+          "video_prompt": "Videos about Chola architecture and the empire’s maritime power."
+        }
+      ]
+    },
+    {
+      "sub_theme_id": "1.2",
+      "sub_theme_name": "Medieval Conflicts",
+      "events": [
+        {
+          "event_id": "1",
+          "event_name": "Battle of Tarain",
+          "description_prompt": "Explain the significance of the Battle of Tarain between Prithviraj Chauhan and Muhammad Ghori.",
+          "images_prompt": "Medieval battlefield with Rajput and Afghan warriors clashing.",
+          "video_prompt": "Historical documentary explaining the impact of the Battle of Tarain on North India."
+        },
+        {
+          "event_id": "2",
+          "event_name": "Establishment of the Delhi Sultanate",
+          "description_prompt": "Describe how the Delhi Sultanate was established in 1206 after the conquest of northern India.",
+          "images_prompt": "Delhi Sultanate’s early architecture and military campaigns.",
+          "video_prompt": "Videos explaining the foundation and expansion of the Delhi Sultanate."
+        },
+        {
+          "event_id": "3",
+          "event_name": "Timurid invasion of India",
+          "description_prompt": "Explain the invasion of India by Timur in 1398 and its effects on the region.",
+          "images_prompt": "Timurid army and devastation in northern India’s cities.",
+          "video_prompt": "Educational videos analyzing the consequences of Timur’s invasion."
+        },
+        {
+          "event_id": "4",
+          "event_name": "First Battle of Panipat",
+          "description_prompt": "Describe the 1526 battle where Babur defeated Ibrahim Lodi, marking the beginning of Mughal rule.",
+          "images_prompt": "Battlefield scenes showing Mughal cannons and cavalry tactics.",
+          "video_prompt": "Historical videos exploring how the battle reshaped Indian politics."
+        },
+        {
+          "event_id": "5",
+          "event_name": "Maratha-Mughal wars",
+          "description_prompt": "Explain the prolonged conflicts between the Marathas and the Mughal Empire during the 17th–18th centuries.",
+          "images_prompt": "Maratha warriors and Mughal forces in combat.",
+          "video_prompt": "Documentary footage exploring the military strategies and impact of these wars."
+        }
+      ]
+    },
+    {
+      "sub_theme_id": "1.3",
+      "sub_theme_name": "Colonial Period & Resistance",
+      "events": [
+        {
+          "event_id": "1",
+          "event_name": "Battle of Plassey",
+          "description_prompt": "Explain how the British East India Company gained control over Bengal through the Battle of Plassey in 1757.",
+          "images_prompt": "Battle scenes with British and Indian forces and strategic negotiations.",
+          "video_prompt": "Videos analyzing the British conquest of Bengal and its implications."
+        },
+        {
+          "event_id": "2",
+          "event_name": "Anglo-Mysore Wars",
+          "description_prompt": "Describe the series of conflicts between the British and Mysore rulers during the late 18th century.",
+          "images_prompt": "Military engagements between Mysore’s forces and British troops.",
+          "video_prompt": "Documentaries exploring Mysore’s resistance to colonial expansion."
+        },
+        {
+          "event_id": "3",
+          "event_name": "Revolt of 1857",
+          "description_prompt": "Explain the causes, events, and consequences of the 1857 uprising against British rule.",
+          "images_prompt": "Scenes of rebellion with Indian sepoys and local rulers fighting colonial forces.",
+          "video_prompt": "Historical accounts and battle re-enactments of the First War of Independence."
+        },
+        {
+          "event_id": "4",
+          "event_name": "Formation of the Indian National Congress",
+          "description_prompt": "Describe the establishment of the Indian National Congress in 1885 and its role in India’s freedom struggle.",
+          "images_prompt": "Early leaders of the Congress and gatherings of intellectuals and activists.",
+          "video_prompt": "Videos explaining the foundation and objectives of the INC."
+        },
+        {
+          "event_id": "5",
+          "event_name": "Swadeshi Movement",
+          "description_prompt": "Explain the objectives and impact of the Swadeshi Movement following the partition of Bengal in 1905.",
+          "images_prompt": "Protests, boycott campaigns, and promotion of indigenous goods.",
+          "video_prompt": "Videos detailing how the Swadeshi Movement strengthened national consciousness."
+        }
+      ]
+    },
+    {
+      "sub_theme_id": "1.4",
+      "sub_theme_name": "Independence Movements",
+      "events": [
+        {
+          "event_id": "1",
+          "event_name": "Jallianwala Bagh Massacre",
+          "description_prompt": "Explain the events and aftermath of the Jallianwala Bagh massacre in 1919.",
+          "images_prompt": "Memorial of the massacre site and grieving families.",
+          "video_prompt": "Documentary exploring the causes and global reaction to the massacre."
+        },
+        {
+          "event_id": "2",
+          "event_name": "Non-Cooperation Movement",
+          "description_prompt": "Describe the objectives and activities of the Non-Cooperation Movement led by Gandhi in 1920.",
+          "images_prompt": "Protests, boycott of British institutions, and civil disobedience actions.",
+          "video_prompt": "Videos showing how this movement laid the groundwork for India’s freedom struggle."
+        },
+        {
+          "event_id": "3",
+          "event_name": "Salt March",
+          "description_prompt": "Explain the Salt March of 1930 and its role in protesting British salt laws.",
+          "images_prompt": "Gandhi leading marchers and making salt from seawater.",
+          "video_prompt": "Educational videos explaining the Salt March’s symbolism and political impact."
+        },
+        {
+          "event_id": "4",
+          "event_name": "Quit India Movement",
+          "description_prompt": "Describe the Quit India Movement launched in 1942 calling for an immediate end to British rule.",
+          "images_prompt": "Mass protests and leaders being arrested by colonial authorities.",
+          "video_prompt": "Documentaries analyzing the movement’s strategy and repression by the British government."
+        },
+        {
+          "event_id": "5",
+          "event_name": "Indian Independence",
+          "description_prompt": "Explain the events leading to India’s independence on 15 August 1947 and the partition that followed.",
+          "images_prompt": "Independence celebrations and scenes of refugees during partition.",
+          "video_prompt": "Videos recounting the historic transfer of power and its long-term consequences."
+        }
+      ]
+    },
+    {
+      "sub_theme_id": "1.5",
+      "sub_theme_name": "Modern Political Movements",
+      "events": [
+        {
+          "event_id": "1",
+          "event_name": "Adoption of the Constitution",
+          "description_prompt": "Explain how India’s Constitution came into effect in 1950 and the principles it upholds.",
+          "images_prompt": "Assembly hall and the first President of India taking oath.",
+          "video_prompt": "Videos discussing the drafting process and importance of the Constitution."
+        },
+        {
+          "event_id": "2",
+          "event_name": "State Reorganization",
+          "description_prompt": "Describe how states in India were reorganized based on linguistic lines in 1956.",
+          "images_prompt": "Maps showing new state boundaries and regional celebrations.",
+          "video_prompt": "Documentaries explaining the political and social implications of state reorganization."
+        },
+        {
+          "event_id": "3",
+          "event_name": "Emergency Period",
+          "description_prompt": "Explain the reasons, events, and impact of the Emergency period declared from 1975 to 1977.",
+          "images_prompt": "Scenes of protests, censorship, and arrests during the Emergency.",
+          "video_prompt": "Videos analyzing the political crisis and restoration of democracy."
+        },
+        {
+          "event_id": "4",
+          "event_name": "Mandal Commission Implementation",
+          "description_prompt": "Describe the implementation of the Mandal Commission’s recommendations in 1990 and its effects on society.",
+          "images_prompt": "Protests and debates around reservation policies for backward classes.",
+          "video_prompt": "Educational videos explaining the social transformation triggered by the Mandal reforms."
+        },
+        {
+          "event_id": "5",
+          "event_name": "Rise of New Political Parties",
+          "description_prompt": "Explain the formation of new political movements like the Aam Aadmi Party in 2012.",
+          "images_prompt": "Campaigns, rallies, and grassroots political activism.",
+          "video_prompt": "Videos discussing the shift in India’s political landscape and voter behavior."
+        }
+      ]
+    },
+    {
+      "sub_theme_id": "1.6",
+      "sub_theme_name": "Post-Independence",
+      "events": [
+        {
+          "event_id": "1",
+          "event_name": "First General Elections",
+          "description_prompt": "Explain how India conducted its first general elections in 1951-52 and the challenges involved.",
+          "images_prompt": "Voting booths and citizens lining up to vote for the first time.",
+          "video_prompt": "Videos describing the electoral process and its impact on democratic participation."
+        },
+        {
+          "event_id": "2",
+          "event_name": "National Integration Efforts",
+          "description_prompt": "Describe the efforts made by the government to integrate princely states and diverse regions post-independence.",
+          "images_prompt": "Maps showing integration of states and celebrations of national unity.",
+          "video_prompt": "Educational videos on the political consolidation of India."
+        },
+        {
+          "event_id": "3",
+          "event_name": "Green Revolution",
+          "description_prompt": "Explain the Green Revolution’s role in transforming agriculture and improving food security in the 1960s and 70s.",
+          "images_prompt": "Fields of wheat and rice cultivation using new farming techniques.",
+          "video_prompt": "Videos explaining the methods and benefits of the agricultural reforms."
+        },
+        {
+          "event_id": "4",
+          "event_name": "Economic Liberalization",
+          "description_prompt": "Describe the economic reforms initiated in 1991 to open up markets and encourage private enterprise.",
+          "images_prompt": "Urban infrastructure, industries, and financial institutions expanding.",
+          "video_prompt": "Documentaries analyzing the causes and effects of economic liberalization."
+        },
+        {
+          "event_id": "5",
+          "event_name": "Digital India Movement",
+          "description_prompt": "Explain the Digital India initiative launched to transform India into a digitally empowered society.",
+          "images_prompt": "People using smartphones and internet services in urban and rural areas.",
+          "video_prompt": "Videos showcasing government efforts to promote digital literacy and connectivity."
+        }
+      ]
+    }
+  ]
+}

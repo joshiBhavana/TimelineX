@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Lock } from "lucide-react";
-import { signInWithGoogle } from "../firebase"; // 🔥 import our google auth function
+import { User, Lock, Eye, EyeOff } from "lucide-react"; // 👀 added Eye icons
+import { signInWithGoogle } from "../firebase";
 
 const Login = ({ onLogin }) => {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -17,11 +18,10 @@ const Login = ({ onLogin }) => {
     }, 1500);
   };
 
-  // ✅ Google login handler
   const handleGoogleLogin = async () => {
     try {
       const user = await signInWithGoogle();
-      onLogin(user); // send user to parent
+      onLogin(user);
       navigate("/dashboard");
     } catch (error) {
       alert("Google Sign-in failed. Try again!");
@@ -29,89 +29,106 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#f4e1c1] via-[#fbe9d7] to-[#f9f3ea]">
-      <div className="relative z-10 w-full max-w-sm px-6 py-8 
-                   bg-white/25 backdrop-blur-md shadow-xl 
-                   rounded-lg border border-amber-300/40 
-                   hover:scale-105 transition-transform 
-                   duration-300 ease-in-out">
-        <h2 className="title-font text-3xl font-bold text-center text-amber-900 mb-3">
+    <div className="w-screen h-screen flex items-center justify-center relative overflow-hidden bg-[#fbe5e0]">
+      <div
+        className="relative z-10 w-full max-w-md px-8 py-10
+             bg-[#c89870] 
+             shadow-2xl 
+             rounded-xl border border-[#9c5a40] 
+             hover:scale-105 hover:shadow-3xl 
+             transition-all duration-500 ease-in-out animate-fadeIn
+             text-white"
+      >
+        <h2 className="title-font text-4xl font-bold text-center text-white mb-3 animate-slideDown">
           Welcome Back
         </h2>
-        <p className="text-center text-sm text-amber-700 mb-6 font-[Lato]">
+        <p className="text-center text-sm text-white mb-3 mb-6 font-[Lato] animate-slideUp">
           Login to continue exploring{" "}
-          <span className="font-semibold title-font text-amber-900">
+          <span className="font-semibold title-font text-red-600 mb-3">
             TimelineX
           </span>
         </p>
 
         <form onSubmit={handleLogin} className="space-y-4 text-sm font-[Lato]">
-          {/* Email */}
-          <div className="relative">
-            <User className="absolute left-3 top-3 w-4 h-4 text-amber-700" />
+          {/* Email input */}
+          <div className="relative animate-slideLeft">
+            <User
+              className="absolute left-3 top-3 w-4 h-4"
+              style={{ color: "#9c5a40" }}
+            />
             <input
               type="email"
               placeholder="Email"
               required
-              className="w-full pl-9 pr-3 py-2 rounded-md border border-amber-300 
-                         focus:ring-1 focus:ring-amber-400 focus:outline-none 
-                         bg-white/60"
+              className="w-full pl-9 pr-3 py-2 rounded-md border border-[#5C3A21] 
+                        focus:ring-1 focus:ring-[#c89870] focus:outline-none 
+                        bg-white/60 text-black caret-black"
             />
           </div>
 
-          {/* Password */}
-          <div className="relative">
-            <Lock className="absolute left-3 top-3 w-4 h-4 text-amber-700" />
+          {/* Password input with eye icon */}
+          <div className="relative animate-slideRight">
+            <Lock
+              className="absolute left-3 top-3 w-4 h-4"
+              style={{ color: "#9c5a40" }}
+            />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               required
-              className="w-full pl-9 pr-3 py-2 rounded-md border border-amber-300 
-                         focus:ring-1 focus:ring-amber-400 focus:outline-none 
-                         bg-white/60"
+              className="w-full pr-10 pl-9 py-2 rounded-md border border-[#5C3A21] 
+                        focus:ring-1 focus:ring-[#c89870] focus:outline-none 
+                        bg-white/60 text-black caret-black"
             />
+            <div
+              className="absolute right-3 top-3 cursor-pointer text-[#9c5a40]"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </div>
           </div>
 
-          {/* Normal Login Button */}
+          {/* Login button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 rounded-md font-semibold text-white text-sm 
-                       bg-gradient-to-r from-amber-600 to-orange-500 shadow-md 
-                       hover:shadow-lg hover:opacity-95 transition duration-300 
-                       disabled:opacity-60"
+            className="w-full py-2 rounded-md font-semibold text-white text-lg
+           bg-[#9c5a40] shadow-md 
+           hover:shadow-lg hover:opacity-95 transition duration-300 
+           disabled:opacity-60 animate-pulse"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        {/* Divider */}
-        <div className="flex items-center my-4">
-          <hr className="flex-grow border-amber-300" />
-          <span className="px-2 text-xs text-amber-700">OR</span>
-          <hr className="flex-grow border-amber-300" />
+        {/* OR divider */}
+        <div className="flex items-center my-4 animate-fadeIn">
+          <hr className="flex-grow border-[#654321]" />
+          <span className="px-2 text-xs text-white">OR</span>
+          <hr className="flex-grow border-[#654321]" />
         </div>
 
-        {/* ✅ Google Login Button */}
+        {/* Google login button */}
         <button
-          onClick={handleGoogleLogin}
-          className="w-full py-2 flex items-center justify-center gap-2 rounded-md border border-amber-300 bg-white/80 hover:bg-amber-50 transition font-medium text-black"
-        >
-          <img
-            src="https://www.svgrepo.com/show/355037/google.svg"
-            alt="Google"
-            className="w-5 h-5"
-          />
-          Continue with Google
-        </button>
+  onClick={handleGoogleLogin}
+  className="w-full py-2 flex items-center justify-center gap-2 rounded-md border border-amber-300 bg-white/80 hover:bg-amber-50 transition font-medium text-black"
+>
+  <img
+    src="https://www.svgrepo.com/show/355037/google.svg"
+    alt="Google"
+    className="w-5 h-5"
+  />
+  Continue with Google
+</button>
 
-        {/* Footer */}
-        <div className="mt-4 text-center">
-          <p className="text-xs text-amber-700 font-[Lato]">
-            Don’t have an account?{" "}
+
+        {/* Signup link */}
+        <div className="mt-4 text-center animate-fadeIn">
+          <p className="text-xs text-white font-[Lato]">
+            Don’t have an account?
             <button
               onClick={() => navigate("/signup")}
-              className="text-orange-600 font-semibold hover:underline"
+              className="text-white font-semibold hover:underline bg-transparent"
             >
               Sign up
             </button>

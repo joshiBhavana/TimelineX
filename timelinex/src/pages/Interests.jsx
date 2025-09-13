@@ -1,18 +1,32 @@
 // Interests.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Globe,
+  Palette,
+  Atom,
+  TrendingUp,
+  Users,
+  BookOpen,
+  Zap,
+  Flag,
+  Award,
+} from "lucide-react";
 
 const Interests = ({ onSubmit }) => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
   const interestsList = [
-    "History",
-    "Science",
-    "Technology",
-    "Art",
-    "Culture",
-    "Politics",
+    { name: "Politics & Wars", icon: Flag },
+    { name: "Culture & Arts", icon: Palette },
+    { name: "Science & Technology", icon: Atom },
+    { name: "Economy & Trade", icon: TrendingUp },
+    { name: "Social Movements", icon: Users },
+    { name: "Religion & Philosophy", icon: BookOpen },
+    { name: "Natural Events & Disasters", icon: Zap },
+    { name: "Modern & Contemporary India", icon: Globe },
+    { name: "Sports & Games", icon: Award },
   ];
 
   const toggleInterest = (interest) => {
@@ -26,43 +40,45 @@ const Interests = ({ onSubmit }) => {
   const handleSubmit = () => {
     if (selected.length > 0) {
       onSubmit(selected);
-
-      // ✅ go to dashboard after selecting
       navigate("/dashboard", { replace: true });
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-orange-50">
-      <div className="bg-white shadow-lg rounded-xl p-8 w-96">
-        <h2 className="text-2xl font-bold text-amber-800 mb-6">
-          Choose Your Interests
-        </h2>
+    <div className="w-screen h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-100 to-yellow-200 animate-fadeIn p-4">
+      <h2 className="text-4xl font-bold text-amber-900 mb-8 animate-bounce text-center">
+        Choose Your Interests
+      </h2>
 
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          {interestsList.map((interest) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-6xl">
+        {interestsList.map((interestObj, index) => {
+          const { name, icon: Icon } = interestObj;
+          return (
             <button
-              key={interest}
-              onClick={() => toggleInterest(interest)}
-              className={`px-4 py-2 rounded-lg border ${
-                selected.includes(interest)
-                  ? "bg-amber-500 text-white border-amber-600"
-                  : "bg-gray-100 text-gray-800 border-gray-300"
+              key={name}
+              onClick={() => toggleInterest(name)}
+              className={`flex flex-col items-center justify-center rounded-lg border shadow-lg px-4 py-6 cursor-pointer transform transition-all duration-300 hover:scale-105
+              ${selected.includes(name)
+                ? "bg-[#c89870] text-white border-[#9c5a40]"
+                : "bg-white text-[#5C3A21] border-[#9c5a40] hover:bg-[#f5e6d8] hover:text-[#9c5a40]"
               }`}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {interest}
+              <Icon className="w-6 h-6 mb-2" />
+              <span className="font-semibold text-center">{name}</span>
             </button>
-          ))}
-        </div>
-
-        <button
-          onClick={handleSubmit}
-          disabled={selected.length === 0}
-          className="w-full bg-amber-600 text-white py-2 rounded-lg hover:bg-amber-700 transition disabled:opacity-50"
-        >
-          Continue
-        </button>
+          );
+        })}
       </div>
+
+      <button
+        onClick={handleSubmit}
+        disabled={selected.length === 0}
+        className="mt-8 px-8 py-3 bg-[#9c5a40] text-white rounded-lg hover:bg-[#7a3e20] transition-all duration-300 disabled:opacity-50 animate-pulse"
+        style={{ animationDelay: `${interestsList.length * 0.1}s` }}
+      >
+        Continue
+      </button>
     </div>
   );
 };

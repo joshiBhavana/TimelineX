@@ -7,39 +7,29 @@ import {
   TrendingUp,
   Bookmark,
   User,
-  ChevronRight,
 } from "lucide-react";
-import RotatingText from "../components/RotatingText";
+import Typewriter from "typewriter-effect";
 
-const Dashboard = ({ user, userInterests, onLogout }) => {
+const Dashboard = ({ user, onLogout }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
   const [profileOpen, setProfileOpen] = useState(false);
-  const [streakCount] = useState(7);
+  const [showWelcome, setShowWelcome] = useState(false);
 
-  // ------------------ Daily Quote ------------------
+  const [selectedTheme, setSelectedTheme] = useState(null);
+  const [selectedSubTheme, setSelectedSubTheme] = useState(null);
+
+  useEffect(() => {
+    setShowWelcome(true);
+  }, []);
+
   const quotes = [
     "History is not a burden on the memory but an illumination of the soul.",
     "The more you know about the past, the better prepared you are for the future.",
     "Study the past if you would define the future.",
     "History repeats itself, first as tragedy, second as farce.",
   ];
-  const [dailyQuote, setDailyQuote] = useState("");
-
-  useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
-    const saved = localStorage.getItem("quoteDate");
-
-    if (saved === today) {
-      setDailyQuote(localStorage.getItem("dailyQuote"));
-    } else {
-      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      setDailyQuote(randomQuote);
-      localStorage.setItem("dailyQuote", randomQuote);
-      localStorage.setItem("quoteDate", today);
-    }
-  }, []);
 
   const images = [
     "/images/image-1.png",
@@ -50,6 +40,7 @@ const Dashboard = ({ user, userInterests, onLogout }) => {
     "/images/image-6.png",
   ];
 
+  const [dailyQuote, setDailyQuote] = useState("");
   const [dailyImage, setDailyImage] = useState("");
 
   useEffect(() => {
@@ -59,229 +50,404 @@ const Dashboard = ({ user, userInterests, onLogout }) => {
     setDailyImage(images[index]);
   }, []);
 
-  // ------------------ Menu Items ------------------
   const menuItems = [
     { id: "home", label: "Home", icon: Home },
     { id: "explore", label: "Explore History", icon: Globe },
-    { id: "games", label: "Fun Games", icon: Gamepad2 },
     { id: "streak", label: "Streak Tracker", icon: TrendingUp },
-    { id: "saved", label: "Saved Events", icon: Bookmark },
+    // { id: "saved", label: "Saved Events", icon: Bookmark },
   ];
 
-  const featuredTimelines = [
-    { title: "Ancient Civilizations", period: "3000 BCE - 500 CE", events: 150, image: "🏛" },
-    { title: "Medieval Period", period: "500 - 1500 CE", events: 200, image: "🏰" },
-    { title: "Renaissance", period: "1400 - 1600 CE", events: 120, image: "🎨" },
-    { title: "Industrial Revolution", period: "1760 - 1840", events: 180, image: "⚙" },
-    { title: "Modern Era", period: "1900 - Present", events: 300, image: "🌍" },
-    { title: "Space Exploration", period: "1957 - Present", events: 90, image: "🚀" },
+  const themes = [
+    {
+      name: "Politics and Wars",
+      image: "/images/theme1.png",
+      subThemes: [
+        { name: "Ancient Kingdoms and Empires", image: "/images/subtheme1.png" },
+        { name: "Medieval Conflicts", image: "/images/subtheme2.png" },
+        { name: "Colonial Period and Resistance", image: "/images/theme3.png" },
+        { name: "Independence Movement", image: "/images/theme4.png" },
+        { name: "Post Independence Movement", image: "/images/theme5.png" },
+        { name: "Modern Political Movements", image: "/images/theme6.png" },
+      ],
+    },
+    {
+      name: "Culture & Arts",
+      image: "/images/theme2.png",
+      subThemes: [
+        { name: "Architecture & Monuments", image: "/images/theme1.png" },
+        { name: "Music & Dance", image: "/images/theme2.png" },
+        { name: "Literature & Poetry", image: "/images/theme3.png" },
+        { name: "Painting & Sculpture", image: "/images/theme4.png" },
+        { name: "Festivals & Traditions", image: "/images/theme5.png" },
+      ],
+    },
+    {
+      name: "Science & Technology",
+      image: "/images/theme3.png",
+      subThemes: [
+        { name: "Ancient Science & Knowledge", image: "/images/theme1.png" },
+        { name: "Medieval Science & Innovations", image: "/images/theme2.png" },
+        { name: "Modern Scientific Achievements", image: "/images/theme3.png" },
+        { name: "Space & Technology", image: "/images/theme4.png" },
+        { name: "Engineering & Industrial Advances", image: "/images/theme4.png" },
+      ],
+    },
+    {
+      name: "Economy & Trade",
+      image: "/images/theme5.png",
+      subThemes: [
+        { name: "Ancient Trade & Economy", image: "/images/theme1.png" },
+        { name: "Medieval Trade & Markets", image: "/images/theme2.png" },
+        { name: "Colonial Economy & Exploitation", image: "/images/theme3.png" },
+        { name: "Post-Independence Economic Development", image: "/images/theme4.png" },
+        { name: "Currency & Banking", image: "/images/theme5.png" },
+      ],
+    },
+    {
+      name: "Social Movements",
+      image: "/images/theme6.png",
+      subThemes: [
+        { name: "Social Reform Movements", image: "/images/theme1.png" },
+        { name: "Independence & Freedom Movements", image: "/images/theme2.png" },
+        { name: "Dalit & Marginalized Movements", image: "/images/theme3.png" },
+        { name: "Women’s Rights Movements", image: "/images/theme4.png" },
+        { name: "Environmental & Regional Movements", image: "/images/theme5.png" },
+      ],
+    },
+    {
+      name: "Religion & Philosophy",
+      image: "/images/theme7.png",
+      subThemes: [
+        { name: "Ancient Religious & Spiritual Traditions", image: "/images/theme1.png" },
+        { name: "Spread of Religions", image: "/images/theme2.png" },
+        { name: "Philosophical Movements", image: "/images/theme3.png" },
+        { name: "Gurus & Spiritual Leaders", image: "/images/theme4.png" },
+        { name: "Temples, Monasteries & Religious Architecture", image: "/images/theme5.png" },
+      ],
+    },
+    {
+      name: "Natural Events & Disasters",
+      image: "/images/theme8.png",
+      subThemes: [
+        { name: "Earthquakes", image: "/images/theme1.png" },
+        { name: "Floods & Droughts", image: "/images/theme2.png" },
+        { name: "Famines", image: "/images/theme3.png" },
+        { name: "Epidemics and Pandemics", image: "/images/theme4.png" },
+      ],
+    },
+    {
+      name: "Modern & Contemporary India",
+      image: "/images/theme9.png",
+      subThemes: [
+        { name: "Political Milestones", image: "/images/theme1.png" },
+        { name: "Science & Technology", image: "/images/theme2.png" },
+        { name: "Cultural & Sports Achievements", image: "/images/theme3.png" },
+        { name: "Economic Milestones", image: "/images/theme4.png" },
+        { name: "Social Change and Movements", image: "/images/theme5.png" },
+      ],
+    },
+    {
+      name: "Sports & Games",
+      image: "/images/theme4.png",
+      subThemes: [
+        { name: "Ancient & Traditional Sports", image: "/images/theme1.png" },
+        { name: "Classical & Modern Sports Achievements", image: "/images/theme2.png" },
+        { name: "Cricket & Popular Sports", image: "/images/theme3.png" },
+        { name: "Sports Institutions & Development", image: "/images/theme4.png" },
+        { name: "Inspirational Athletes & Legends", image: "/images/theme5.png" },
+      ],
+    },
   ];
 
-  // ------------------ Section Renderers ------------------
+  const events = [
+    { name: "Event 1", image: "/images/theme1.png" },
+    { name: "Event 2", image: "/images/theme2.png" },
+    { name: "Event 3", image: "/images/theme3.png" },
+    { name: "Event 4", image: "/images/theme4.png" },
+    { name: "Event 5", image: "/images/theme5.png" },
+  ];
+
   const renderHomeContent = () => (
-    <div className="animate-fadeIn space-y-8">
-      {/* Quote + Image Split Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center p-8 bg-white text-black rounded-2xl shadow-xl">
-        {/* Left Side: Quote */}
-        <div className="flex flex-col justify-center px-6">
-          <RotatingText
-            texts={["📜 Quote of the Day", "🌟 Stay Positive", "🧠 Keep Learning"]}
-            mainClassName="rotating-heading"
-            rotationInterval={2500}
-          />
-          <p className="mt-4 text-base sm:text-lg md:text-xl text-left italic text-gray-800 leading-relaxed">
-            “{dailyQuote}”
-          </p>
-        </div>
-
-        {/* Right Component (Image Section) */}
-        <div className="w-full md:w-1/2 flex justify-center mt-8 md:mt-0">
-          <img
-            src={dailyImage}
-            alt="Daily Inspiration"
-            className="rounded-2xl shadow-lg w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] object-cover animate-fadeIn"
+    <div className="animate-fadeIn space-y-8 px-6">
+      {showWelcome && (
+        <div className="mb-4 text-2xl font-bold text-[#b95c50]">
+          <Typewriter
+            options={{
+              strings: ["Welcome to TimelineX!"],
+              autoStart: true,
+              loop: true,
+              delay: 75,
+            }}
           />
         </div>
-      </div>
+      )}
 
-      {/* Featured Timelines */}
-      <div
-        className={`${
-          darkMode ? "bg-gray-800" : "bg-white/80 backdrop-blur"
-        } p-8 rounded-2xl shadow-xl`}
-      >
-        <h3 className="text-2xl font-bold mb-6">Featured Timelines</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredTimelines.map((timeline, index) => (
-            <div
-              key={index}
-              className={`p-6 rounded-xl border transition-all transform hover:scale-105 hover:shadow-xl cursor-pointer ${
-                darkMode
-                  ? "bg-gray-700 border-gray-600 hover:bg-gray-600"
-                  : "bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200"
-              }`}
+      <div className="flex justify-center w-full mt-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-6xl w-full">
+          <div>
+            <h3 className="text-6xl font-extrabold mb-4 text-[#b95c50]">
+              History at Your Fingertips
+            </h3>
+            <p className="text-gray-700 text-lg leading-relaxed mb-6">
+              Step into the past with TimelineX — where history comes alive
+              through interactive timelines, fascinating events, and unforgettable stories.
+            </p>
+            <button
+              onClick={() => setActiveSection("explore")}
+              className="px-6 py-3 bg-[#b95c50] text-white font-semibold rounded-xl shadow-md hover:bg-[#a24d42] transition"
             >
-              <div className="text-4xl mb-4">{timeline.image}</div>
-              <h4 className="font-semibold mb-2">{timeline.title}</h4>
-              <p
-                className={`text-sm mb-3 ${
-                  darkMode ? "text-gray-400" : "text-amber-700"
-                }`}
-              >
-                {timeline.period}
-              </p>
-              <div className="flex justify-between items-center">
-                <span
-                  className={`text-xs px-2 py-1 rounded-full ${
-                    darkMode
-                      ? "bg-gray-600 text-gray-300"
-                      : "bg-amber-100 text-amber-700"
-                  }`}
-                >
-                  {timeline.events} events
-                </span>
-                <ChevronRight className="w-4 h-4 text-amber-600" />
-              </div>
-            </div>
-          ))}
+              Explore History
+            </button>
+          </div>
+
+          <div className="flex justify-center">
+            <img
+              src="/images/img-1.png"
+              alt="Journey Through Time"
+              className="max-w-full max-h-96 object-contain rounded-xl"
+            />
+          </div>
         </div>
       </div>
     </div>
   );
 
+  const renderExploreThemes = () => (
+  <div className="flex flex-col items-center py-8">
+    <h2 className="text-4xl font-bold text-[#b95c50] mb-8 text-center">
+      Explore Historical Themes
+    </h2>
+    <p className="text-gray-600 text-center max-w-2xl mb-8">
+      Choose a theme to explore fascinating stories, events, and milestones from history.
+      Click on a card below to dive deeper and learn more about the past.
+    </p>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full">
+      {themes.map((theme, idx) => (
+        <div
+          key={idx}
+          className="p-6 bg-white rounded-xl shadow-lg cursor-pointer hover:shadow-2xl transition"
+          onClick={() => setSelectedTheme(theme)}
+        >
+          <img
+            src={theme.image}
+            alt={theme.name}
+            className="w-full h-40 object-cover rounded-lg mb-4"
+          />
+          <h3 className="text-xl font-bold text-[#b95c50] text-center">{theme.name}</h3>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+  const renderSubThemes = () => {
+    if (!selectedTheme) return null;
+
+    return (
+      <div>
+        <div className="p-4 flex justify-start">
+          <button
+            onClick={() => setSelectedTheme(null)}
+            className="px-4 py-2 text-[#b95c50] hover:underline font-medium bg-transparent text-sm outline-none focus:outline-none ring-0"
+          >
+            ← Back to Themes
+          </button>
+        </div>
+        <h2 className="text-3xl font-bold text-[#b95c50] mb-6 text-center">
+          {selectedTheme.name} - SubThemes
+        </h2>
+        <p className="text-gray-600 text-center mx-auto max-w-2xl mb-8">
+          Select a sub-theme to explore detailed events and stories related to this topic.
+          Click on a card below to learn more and uncover the rich history behind it.
+        </p>
+        <div className="flex justify-center py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full">
+            {selectedTheme.subThemes.map((sub, idx) => (
+              <div
+                key={idx}
+                className="p-4 bg-white rounded-xl shadow-lg cursor-pointer hover:shadow-2xl transition"
+                onClick={() => setSelectedSubTheme(sub)}
+              >
+                <img
+                  src={sub.image}
+                  alt={sub.name}
+                  className="w-full h-40 object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-semibold text-center">{sub.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderEvents = () => {
+    if (!selectedSubTheme) return null;
+
+    return (
+      <div>
+        <div className="p-4 flex justify-start">
+          <button
+            onClick={() => setSelectedSubTheme(null)}
+            className="px-4 py-2 text-[#b95c50] hover:underline font-medium bg-transparent text-sm outline-none focus:outline-none ring-0"
+          >
+            ← Back to Sub-Themes
+          </button>
+          <button
+            onClick={() => {
+              setSelectedSubTheme(null);
+              setSelectedTheme(null);
+            }}
+            className="px-4 py-2 text-[#b95c50] hover:underline font-medium ml-4 bg-transparent text-sm outline-none focus:outline-none ring-0"
+          >
+            ← Back to Themes
+          </button>
+        </div>
+        <h2 className="text-3xl font-bold text-[#b95c50] mb-6 text-center">
+          {selectedSubTheme.name} - Events
+        </h2>
+        <p className="text-gray-600 text-center mx-auto max-w-2xl mb-8">
+          Explore the events related to this sub-theme to uncover fascinating stories, important milestones, and historical insights.
+          Click on an event card below to learn more and dive into the details.
+        </p>
+
+        <div className="flex justify-center py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full">
+            {events.map((event, idx) => (
+              <div
+                key={idx}
+                className="p-4 bg-white rounded-xl shadow-lg cursor-pointer hover:shadow-2xl transition"
+              >
+                <img
+                  src={event.image}
+                  alt={event.name}
+                  className="w-full h-40 object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-semibold text-center">{event.name}</h3>
+                <p className="text-gray-600 mt-2 text-center">
+                  Description of {event.name} in {selectedSubTheme.name}.
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const renderContent = () => {
-    switch (activeSection) {
-      case "explore":
-        return <div className="animate-fadeIn">Explore Section UI here</div>;
-      case "games":
-        return <div className="animate-fadeIn">Games Section UI here</div>;
-      case "streak":
-        return <div className="animate-fadeIn">Streak Section UI here</div>;
-      case "saved":
-        return <div className="animate-fadeIn">Saved Section UI here</div>;
-      default:
-        return renderHomeContent();
+    if (activeSection === "explore") {
+      if (selectedSubTheme) return renderEvents();
+      if (selectedTheme) return renderSubThemes();
+      return renderExploreThemes();
     }
+    if (activeSection === "streak") return <div>Streak Section UI here</div>;
+    // if (activeSection === "saved") return <div>Saved Section UI here</div>;
+    return renderHomeContent();
   };
 
   return (
     <div
-      className={`w-screen h-screen relative overflow-hidden transition-colors ${
-        darkMode
-          ? "bg-gray-900 text-white"
-          : "bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 text-gray-900"
-      }`}
+      className="w-screen min-h-screen relative overflow-auto transition-colors duration-300"
+      style={{
+        background: darkMode ? "#1f2937" : "#fbe5e0",
+        color: darkMode ? "#ffffff" : "#000000",
+      }}
     >
       {/* Navbar */}
       <header
-        className={`flex items-center justify-between px-6 py-4 shadow-md ${
-          darkMode ? "bg-gray-800" : "bg-white/80 backdrop-blur"
-        }`}
+        className="flex items-center justify-between px-6 py-4 shadow-md"
+        style={{ background: darkMode ? "#374151" : "#fbe5e0" }}
       >
-        {/* Left Section */}
-        <div className="flex items-center space-x-4">
-          <div className="text-2xl font-bold text-amber-600">🕰</div>
-          <span className="text-lg font-medium">
-            Hi! Welcome <span className="font-bold">{user.name}</span>
-          </span>
-        </div>
-
-        {/* Middle Section (Search Bar) */}
-        <div className="flex-1 px-10 max-w-sm">
-          <div
-            className={`flex items-center px-4 py-2 rounded-xl shadow-md ${
-              darkMode ? "bg-gray-700" : "bg-amber-50"
-            }`}
+        <div className="flex items-center space-x-4 max-w-2xl">
+          <h1
+            className="text-xl font-bold"
+            style={{ color: darkMode ? "#fff" : "#3b0404" }}
           >
-            <Search className="w-5 h-5 mr-3 text-gray-500" />
+            TimelineX
+          </h1>
+          <div
+            className="flex items-center px-4 py-2 rounded-xl shadow-md flex-1"
+            style={{ background: "#de847b" }}
+          >
+            <Search className="w-4 h-4 mr-3 text-white" />
             <input
               type="text"
               placeholder="Search history..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full bg-transparent outline-none ${
-                darkMode
-                  ? "text-white placeholder-gray-400"
-                  : "text-gray-800 placeholder-gray-500"
-              }`}
+              className="w-full bg-transparent outline-none placeholder-white"
+              style={{ color: "#fff", caretColor: "#fff" }}
             />
           </div>
         </div>
 
-        {/* Right Section (Profile + Dark Mode) */}
-        <div className="relative flex items-center space-x-4">
-          {/* Profile dropdown */}
+        <div className="flex items-center space-x-4">
+          <nav className="flex space-x-4">
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveSection(item.id);
+                  setSelectedTheme(null);
+                  setSelectedSubTheme(null);
+                }}
+                className={`px-2 py-1 font-medium transition-colors duration-200 border-b-2 ${
+                  activeSection === item.id
+                    ? "border-[#b95c50] text-[#b95c50]"
+                    : darkMode
+                    ? "border-transparent text-gray-300 hover:text-white hover:border-[#b95c50]"
+                    : "border-transparent text-black hover:text-[#b95c50] hover:border-[#b95c50]"
+                }`}
+                style={{ background: "transparent" }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
           <div
-            className={`p-2 rounded-full cursor-pointer ${
-              darkMode ? "bg-gray-700" : "bg-amber-100"
-            }`}
+            className="p-2 rounded-full cursor-pointer transition-colors"
+            style={{ backgroundColor: darkMode ? "#deb3ad" : "#de847b" }}
             onClick={() => setProfileOpen(!profileOpen)}
           >
-            <User className="w-6 h-6" />
+            <User className="w-6 h-6" style={{ color: darkMode ? "#000" : "#fff" }} />
           </div>
 
           {profileOpen && (
             <div
-              className={`absolute top-12 right-20 w-40 rounded-xl shadow-lg p-3 z-50 ${
-                darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-              }`}
+              className="absolute top-16 right-6 w-40 rounded-xl shadow-lg p-3 z-50"
+              style={{
+                backgroundColor: darkMode ? "#deb3ad" : "#de847b",
+                color: darkMode ? "#000" : "#fff",
+              }}
             >
               <button
                 onClick={onLogout}
-                className="w-full text-left px-4 py-2 rounded-md hover:bg-red-100 hover:text-red-600 transition"
+                className="w-full text-left px-4 py-2 rounded-md transition hover:opacity-90 bg-transparent"
               >
                 Logout
               </button>
             </div>
           )}
 
-          {/* Dark Mode Toggle */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className={`p-2 rounded-lg transition ${
-              darkMode
-                ? "bg-gray-700 text-yellow-400 hover:bg-gray-600"
-                : "bg-amber-100 text-amber-700 hover:bg-amber-200"
-            }`}
+            className="p-2 rounded-lg transition"
+            style={{
+              backgroundColor: darkMode ? "#deb3ad" : "#de847b",
+              color: darkMode ? "#000" : "#fff",
+            }}
           >
             {darkMode ? "☀️" : "🌙"}
           </button>
         </div>
       </header>
 
-      {/* Foreground Content */}
-      <div className="relative z-10 flex h-[calc(100%-64px)]">
-        {/* Sidebar */}
-        <nav
-          className={`w-64 min-h-full border-r shadow-xl ${
-            darkMode
-              ? "bg-gray-800 border-gray-700"
-              : "bg-white/70 border-amber-200 backdrop-blur"
-          }`}
-        >
-          <div className="p-6 space-y-2">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveSection(item.id)}
-                className={`w-full flex items-center px-4 py-3 rounded-xl transition-all ${
-                  activeSection === item.id
-                    ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg"
-                    : darkMode
-                    ? "text-gray-300 hover:bg-gray-700"
-                    : "text-amber-800 hover:bg-amber-50"
-                }`}
-              >
-                <item.icon className="w-5 h-5 mr-3" />
-                <span className="font-medium">{item.label}</span>
-              </button>
-            ))}
-          </div>
-        </nav>
-
-        {/* Main Content */}
-        <main className="flex-1 p-8 overflow-y-auto">{renderContent()}</main>
-      </div>
+      <main className="flex-1 p-8 transition-all duration-500 ease-in-out">
+        {renderContent()}
+      </main>
     </div>
   );
 };
