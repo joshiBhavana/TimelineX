@@ -46,7 +46,7 @@ const Interests = ({ onSubmit }) => {
 
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-100 to-yellow-200 animate-fadeIn p-4">
-      <h2 className="text-4xl font-bold text-amber-900 mb-8 animate-bounce text-center">
+      <h2 className="text-4xl font-bold text-[#b95c50] mb-8">
         Choose Your Interests
       </h2>
 
@@ -59,8 +59,8 @@ const Interests = ({ onSubmit }) => {
               onClick={() => toggleInterest(name)}
               className={`flex flex-col items-center justify-center rounded-lg border shadow-lg px-4 py-6 cursor-pointer transform transition-all duration-300 hover:scale-105
               ${selected.includes(name)
-                ? "bg-[#c89870] text-white border-[#9c5a40]"
-                : "bg-white text-[#5C3A21] border-[#9c5a40] hover:bg-[#f5e6d8] hover:text-[#9c5a40]"
+                ? "bg-[#cf6856] text-white border-[#9c5a40]"
+                : "bg-white text-[#5C3A21] border-[#d0b49f] hover:bg-[#b95c50] hover:text-white"
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -74,7 +74,7 @@ const Interests = ({ onSubmit }) => {
       <button
         onClick={handleSubmit}
         disabled={selected.length === 0}
-        className="mt-8 px-8 py-3 bg-[#9c5a40] text-white rounded-lg hover:bg-[#7a3e20] transition-all duration-300 disabled:opacity-50 animate-pulse"
+        className="mt-8 px-8 py-3 bg-[#cf6856] text-white rounded-lg hover:bg-[#cf6856]"
         style={{ animationDelay: `${interestsList.length * 0.1}s` }}
       >
         Continue
